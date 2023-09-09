@@ -1,2 +1,5 @@
 # ScreenCap
-A basic screen recording program built with electron.js
+A basic screen recording program built with electron.js.
+It can record a selected window and audio.
+
+![image](./images/image.png)
