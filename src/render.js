@@ -67,7 +67,11 @@ async function selectSource(source) {
     sourceSelectButton.innerText = source.name;
 
     const stream = await navigator.mediaDevices.getUserMedia({
-        audio: false,
+        audio: {
+            mandatory: {
+                chromeMediaSource: 'desktop'
+            }
+        },
         video: {
             mandatory: {
                 chromeMediaSource: 'desktop',
@@ -78,10 +82,12 @@ async function selectSource(source) {
 
     videoElement.srcObject = stream;
     videoElement.play();
+    videoElement.muted = true;
 
     recorder = new MediaRecorder(stream, {
         videoBitsPerSecond: 10 * 1000000, // 10 Mbps
-        mimeType: 'video/webm;codecs=av1' // av01
+        audioBitsPerSecond: 192 * 1000, // 192 Kbps
+        mimeType: 'video/webm;codecs=av1;audio/opus;codecs=opus;' // av01
     });
 
     recorder.ondataavailable = handleDataAvailable;
@@ -94,7 +100,7 @@ function handleDataAvailable(event) {
 
 async function handleStop(event) {
     const blob = new Blob(videoChunks, {
-        type: 'video/webm;codecs=av1' // av01
+        type: 'video/webm;codecs=av1;audio/opus;codecs=opus;' // av01
     });
 
     const buffer = Buffer.from(await blob.arrayBuffer());
