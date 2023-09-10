@@ -61,7 +61,7 @@ async function getVideoSources() {
     sourceOptionMenu.popup();
 }
 
-const videoChunks = [];
+let videoChunks = [];
 
 async function selectSource(source) {
     sourceSelectButton.innerText = source.name;
@@ -119,4 +119,6 @@ async function handleStop(event) {
     catch (error) {
         console.log(error);
     }
+
+    videoChunks = [];
 }
