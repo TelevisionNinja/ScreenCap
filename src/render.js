@@ -114,7 +114,7 @@ async function handleStop(event) {
 
     const { filePath } = await dialog.showSaveDialog({
         buttonLabel: 'Save video',
-        defaultPath: `screncap-${currentTimeString}.mp4`
+        defaultPath: `screncap-${currentTimeString}.webm`
     });
 
     try {
