@@ -69,13 +69,17 @@ async function selectSource(source) {
     const stream = await navigator.mediaDevices.getUserMedia({
         audio: {
             mandatory: {
-                chromeMediaSource: 'desktop'
+                chromeMediaSource: 'desktop',
+                minSampleRate: 44.1 * 1000, // 44.1 kHz
+                maxSampleRate: 192 * 1000, // 192 kHz
             }
         },
         video: {
             mandatory: {
                 chromeMediaSource: 'desktop',
-                chromeMediaSourceId: source.id
+                chromeMediaSourceId: source.id,
+                minFrameRate: 60,
+                maxFrameRate: 240
             }
         }
     });
