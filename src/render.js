@@ -85,9 +85,9 @@ async function selectSource(source) {
     videoElement.muted = true;
 
     recorder = new MediaRecorder(stream, {
-        videoBitsPerSecond: 10 * 1000000, // 10 Mbps
+        videoBitsPerSecond: 20 * 1000000, // 10 Mbps
         audioBitsPerSecond: 192 * 1000, // 192 Kbps
-        mimeType: 'video/webm;codecs=av1;audio/opus;codecs=opus;' // av01
+        mimeType: 'video/webm;codecs="av1.2.31H.12.0.110.09.16.09.1,opus"'
     });
 
     recorder.ondataavailable = handleDataAvailable;
@@ -100,7 +100,7 @@ function handleDataAvailable(event) {
 
 async function handleStop(event) {
     const blob = new Blob(videoChunks, {
-        type: 'video/webm;codecs=av1;audio/opus;codecs=opus;' // av01
+        type: 'video/webm;codecs="av1.2.31H.12.0.110.09.16.09.1,opus"'
     });
 
     const buffer = Buffer.from(await blob.arrayBuffer());
