@@ -122,6 +122,7 @@ async function handleStop(event) {
     }
     catch (error) {
         console.log(error);
+        dialog.showErrorBox('Save Error', error);
     }
 
     videoChunks = [];
